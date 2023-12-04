@@ -18,6 +18,7 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
      */
     public NEU_admin_MainFrame() {
         initComponents();
+        this.setTitle("UPS Managment Systems");
         OrderCancellationRequestPanel orp = new OrderCancellationRequestPanel();
         bottomPanel.add(orp);
         CardLayout lay = (CardLayout)bottomPanel.getLayout();
@@ -43,6 +44,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         manageEmployeeButton_SidePanel = new javax.swing.JLabel();
         OrderAssignmentButton_SidePanel = new javax.swing.JPanel();
         OrderAssignmentLabel_SidePanel = new javax.swing.JLabel();
+        ExportButton_SidePanel1 = new javax.swing.JPanel();
+        ExportLabel_SidePanel1 = new javax.swing.JLabel();
         viewPanel = new javax.swing.JPanel();
         viewSplitPane = new javax.swing.JSplitPane();
         topPanel = new javax.swing.JPanel();
@@ -155,6 +158,34 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        ExportButton_SidePanel1.setBackground(new java.awt.Color(52, 104, 136));
+        ExportButton_SidePanel1.setPreferredSize(new java.awt.Dimension(186, 56));
+        ExportButton_SidePanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExportButton_SidePanel1MouseClicked(evt);
+            }
+        });
+
+        ExportLabel_SidePanel1.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        ExportLabel_SidePanel1.setForeground(new java.awt.Color(255, 255, 255));
+        ExportLabel_SidePanel1.setText("Export");
+
+        javax.swing.GroupLayout ExportButton_SidePanel1Layout = new javax.swing.GroupLayout(ExportButton_SidePanel1);
+        ExportButton_SidePanel1.setLayout(ExportButton_SidePanel1Layout);
+        ExportButton_SidePanel1Layout.setHorizontalGroup(
+            ExportButton_SidePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ExportButton_SidePanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ExportLabel_SidePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ExportButton_SidePanel1Layout.setVerticalGroup(
+            ExportButton_SidePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ExportButton_SidePanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ExportLabel_SidePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
@@ -168,9 +199,10 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
                     .addGroup(sidePanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Seperator_1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addComponent(ManageEmployeeButton_SidePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-            .addComponent(OrderAssignmentButton_SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addComponent(ManageEmployeeButton_SidePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+            .addComponent(OrderAssignmentButton_SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+            .addComponent(ExportButton_SidePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,6 +217,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
                 .addComponent(ManageEmployeeButton_SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(OrderAssignmentButton_SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(ExportButton_SidePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -293,26 +327,33 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
 
     private void ManageEmployeeButton_SidePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageEmployeeButton_SidePanelMouseClicked
 
+       jLabel3.setText("Manage Employees /");        
         ManageEmployeePanel mep = new ManageEmployeePanel();
         bottomPanel.add(mep);
         CardLayout lay = (CardLayout)bottomPanel.getLayout();
         lay.next(bottomPanel);
         ManageEmployeeButton_SidePanel.setBackground(new Color(122,166,194));
         orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
+        OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
+        ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
     }//GEN-LAST:event_ManageEmployeeButton_SidePanelMouseClicked
 
     private void orderCancellationButton_SidePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderCancellationButton_SidePanelMouseClicked
         // TODO add your handling code here:
+       jLabel3.setText("Order Cancellation Request /");
         OrderCancellationRequestPanel ocr = new OrderCancellationRequestPanel();
         bottomPanel.add(ocr);
         CardLayout lay = (CardLayout)bottomPanel.getLayout();
         lay.next(bottomPanel);
         orderCancellationButton_SidePanel.setBackground(new Color(122,166,194));
-        ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136));        
+        ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136)); 
+        OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
+        ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
     }//GEN-LAST:event_orderCancellationButton_SidePanelMouseClicked
 
     private void OrderAssignmentButton_SidePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderAssignmentButton_SidePanelMouseClicked
         // TODO add your handling code here:
+        jLabel3.setText("Order Assignments /");
         AssignOrderPanel aop = new AssignOrderPanel();
         bottomPanel.add(aop);
         CardLayout lay = (CardLayout)bottomPanel.getLayout();
@@ -320,7 +361,21 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         OrderAssignmentButton_SidePanel.setBackground(new Color(122,166,194));
         orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
         ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136));  
+        ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
     }//GEN-LAST:event_OrderAssignmentButton_SidePanelMouseClicked
+
+    private void ExportButton_SidePanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportButton_SidePanel1MouseClicked
+        // TODO add your handling code here:
+        jLabel3.setText("Exports /");
+        ExportData_View ed = new ExportData_View();
+        bottomPanel.add(ed);
+        CardLayout lay = (CardLayout)bottomPanel.getLayout();
+        lay.next(bottomPanel);
+        ExportButton_SidePanel1.setBackground(new Color(122,166,194));
+        OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
+        orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
+        ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136)); 
+    }//GEN-LAST:event_ExportButton_SidePanel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -358,6 +413,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel ExportButton_SidePanel1;
+    private javax.swing.JLabel ExportLabel_SidePanel1;
     private javax.swing.JPanel ManageEmployeeButton_SidePanel;
     private javax.swing.JPanel OrderAssignmentButton_SidePanel;
     private javax.swing.JLabel OrderAssignmentLabel_SidePanel;
