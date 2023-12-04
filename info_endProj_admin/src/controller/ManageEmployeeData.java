@@ -48,5 +48,9 @@ public class ManageEmployeeData {
     public static void addUser(int EID, String Name, String CompanyName, String Role, String Password){
      // add user to database .. add fields accordingly
     }
+    public static int totalEmplyee(){
+        // return total number of employee in ups except managers
+        return 7;
+    }
     
 }

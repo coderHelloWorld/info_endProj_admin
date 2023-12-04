@@ -4,6 +4,13 @@
  */
 package veiw;
 
+import controller.AssignOrdersData;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.AssignmentRequests;
+import model.EmployeeLoadTable;
+
 /**
  *
  * @author Purvam Sheth
@@ -13,8 +20,14 @@ public class AssignOrderPanel extends javax.swing.JPanel {
     /**
      * Creates new form AssignOrderPanel
      */
+    EmployeeLoadTable et;
+    ArrayList<EmployeeLoadTable> ets;
+    
+    AssignmentRequests ot;
+    ArrayList<AssignmentRequests> ots;
     public AssignOrderPanel() {
         initComponents();
+        populateFields();
     }
 
     /**
@@ -26,27 +39,27 @@ public class AssignOrderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        tableScrollPane1 = new javax.swing.JScrollPane();
-        CancelRequest_Table1 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        tableScrollPane2 = new javax.swing.JScrollPane();
-        CancelRequest_Table2 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        pendingRequestTallyLable = new javax.swing.JLabel();
+        pendingRequestScrollPane = new javax.swing.JScrollPane();
+        pendingRequestsTable = new javax.swing.JTable();
+        assignButton = new javax.swing.JPanel();
+        assignButtonLabel = new javax.swing.JLabel();
+        employeeLoadTableScrollPane = new javax.swing.JScrollPane();
+        employeeLoadTable = new javax.swing.JTable();
+        submitButton = new javax.swing.JPanel();
+        submitButtonLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(943, 600));
         setMinimumSize(new java.awt.Dimension(943, 600));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel2.setText("Total Pending Requests: ");
+        pendingRequestTallyLable.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        pendingRequestTallyLable.setText("Total Pending Requests: ");
 
-        CancelRequest_Table1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        CancelRequest_Table1.setModel(new javax.swing.table.DefaultTableModel(
+        pendingRequestsTable.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        pendingRequestsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"56473", "Amazon", "King st. west", "Assigning Agent", "Due to this I want to remove this!"},
+                {"56473", "Amazon", "King st. west", "Assigning Agent", "44-66-9876"},
                 {"57683", "Flipkart", "Queen st.  west", "Assigning Agent", "34-12-5678"},
                 {"892043", "Amazon", "Dundas sq", "Assigining Agent", "12-34-5678"}
             },
@@ -54,33 +67,36 @@ public class AssignOrderPanel extends javax.swing.JPanel {
                 "OID", "Ordering Company", "Address", "Order Status", "Date Created"
             }
         ));
-        tableScrollPane1.setViewportView(CancelRequest_Table1);
-        if (CancelRequest_Table1.getColumnModel().getColumnCount() > 0) {
-            CancelRequest_Table1.getColumnModel().getColumn(4).setHeaderValue("Date Created");
-        }
+        pendingRequestScrollPane.setViewportView(pendingRequestsTable);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Click here to assign");
+        assignButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                assignButtonMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+        assignButtonLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        assignButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        assignButtonLabel.setText("Click here to assign");
+
+        javax.swing.GroupLayout assignButtonLayout = new javax.swing.GroupLayout(assignButton);
+        assignButton.setLayout(assignButtonLayout);
+        assignButtonLayout.setHorizontalGroup(
+            assignButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(assignButtonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        assignButtonLayout.setVerticalGroup(
+            assignButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(assignButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(assignButtonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
-        CancelRequest_Table2.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        CancelRequest_Table2.setModel(new javax.swing.table.DefaultTableModel(
+        employeeLoadTable.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        employeeLoadTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"56473", "PAWAN", "12", "Assigning Agent"},
+                {"56473", "PAWAN", "12", "26"},
                 {"57683", "KUMAR", "32", "8"},
                 {"892043", "SHEKAVAT", "11", "21"}
             },
@@ -88,23 +104,29 @@ public class AssignOrderPanel extends javax.swing.JPanel {
                 "EID", "Employee Name", "Completed Orders", "Working on"
             }
         ));
-        tableScrollPane2.setViewportView(CancelRequest_Table2);
+        employeeLoadTableScrollPane.setViewportView(employeeLoadTable);
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Submit");
+        submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                submitButtonMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+        submitButtonLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        submitButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        submitButtonLabel.setText("Submit");
+
+        javax.swing.GroupLayout submitButtonLayout = new javax.swing.GroupLayout(submitButton);
+        submitButton.setLayout(submitButtonLayout);
+        submitButtonLayout.setHorizontalGroup(
+            submitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(submitButtonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        submitButtonLayout.setVerticalGroup(
+            submitButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(submitButtonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(submitButtonLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -115,44 +137,122 @@ public class AssignOrderPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tableScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pendingRequestScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
+                    .addComponent(pendingRequestTallyLable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(assignButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(tableScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(employeeLoadTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(tableScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pendingRequestScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pendingRequestTallyLable, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(assignButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tableScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(employeeLoadTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void assignButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_assignButtonMouseClicked
+        // TODO add your handling code here:
+        int selectedIndex = pendingRequestsTable.getSelectedRow();
+        if(selectedIndex == -1){
+            JOptionPane.showMessageDialog(this, "Please, first select an order", "Cannot perform action", HEIGHT);
+        }
+        else{
+            employeeLoadTableScrollPane.setVisible(true);
+            employeeLoadTable.setVisible(true);
+            submitButton.setVisible(true);
+        }
+//        CancelRequest selectedData = reqs.get(selectedIndex);
+//        // System.out.println("Selected id is: "+ selectedData.getOID());
+//         AssignOrdeData.updateOrderStatus(selectedData.getOID();
+//         populateTable();
+
+    }//GEN-LAST:event_assignButtonMouseClicked
+
+    private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
+        // TODO add your handling code here:
+        int selectedIndex = employeeLoadTable.getSelectedRow();
+        int selectedIndex1 = pendingRequestsTable.getSelectedRow();
+
+        if(selectedIndex1 == -1 || selectedIndex == -1){
+            JOptionPane.showMessageDialog(this, "Please, make sure to select an order and an employee!", "Cannot perform action", HEIGHT);
+        }
+        else{
+            AssignmentRequests selectedData = ots.get(selectedIndex1);
+            EmployeeLoadTable selectedData1 = ets.get(selectedIndex);
+            System.out.println("Selected id is: "+ selectedData.getOID() + " " + selectedData1.getEID());
+            AssignOrdersData.updateOrderStatus(selectedData.getOID(), selectedData1.getEID());
+            populateFields();            
+        }
+        employeeLoadTableScrollPane.setVisible(false);
+        employeeLoadTable.setVisible(false);
+        submitButton.setVisible(false);
+    }//GEN-LAST:event_submitButtonMouseClicked
+    
+    private void populateFields(){
+        System.out.println("Hello world from View Panel - assign! ");
+        employeeLoadTableScrollPane.setVisible(false);
+        employeeLoadTable.setVisible(false);
+        submitButton.setVisible(false);
+        pendingRequestTallyLable.setText("Total Pending Requests : "+AssignOrdersData.totalEmplyee());
+        try{
+            this.ets = AssignOrdersData.getAllUsers();
+            DefaultTableModel table = (DefaultTableModel) employeeLoadTable.getModel();
+            table.setRowCount(0);
+            for(EmployeeLoadTable u: ets){
+                Object[] row = new Object[5];
+                row[0] = u.getEID();
+                row[1] = u.getEmployeeName();
+                row[2] = u.getCompletedOrder_thisMonth();
+                row[3] = u.getProcessingOrder_thisMonth();
+                table.addRow(row);
+            }
+            // TotalEmployeeCountLabel.setText("Total Pending Requests : " +OrderCancellationRequestData.totalCancellationRequestTally()); 
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Exception occoured!", "Cannot update user", HEIGHT);
+        }
+        try{
+            this.ots = AssignOrdersData.getAllOrdersData();
+            DefaultTableModel table = (DefaultTableModel) pendingRequestsTable.getModel();
+            table.setRowCount(0);
+            for(AssignmentRequests u: ots){
+                Object[] row = new Object[5];
+                row[0] = u.getOID();
+                row[2] = u.getCompanyName();
+                row[1] = u.getAddress();
+                row[3] = u.getOrderStatus();
+                row[4] = u.getDate();
+                table.addRow(row);
+            }
+            // TotalEmployeeCountLabel.setText("Total Pending Requests : " +OrderCancellationRequestData.totalCancellationRequestTally()); 
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Exception occoured!", "Cannot update user", HEIGHT);
+        }        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable CancelRequest_Table1;
-    private javax.swing.JTable CancelRequest_Table2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane tableScrollPane1;
-    private javax.swing.JScrollPane tableScrollPane2;
+    private javax.swing.JPanel assignButton;
+    private javax.swing.JLabel assignButtonLabel;
+    private javax.swing.JTable employeeLoadTable;
+    private javax.swing.JScrollPane employeeLoadTableScrollPane;
+    private javax.swing.JScrollPane pendingRequestScrollPane;
+    private javax.swing.JLabel pendingRequestTallyLable;
+    private javax.swing.JTable pendingRequestsTable;
+    private javax.swing.JPanel submitButton;
+    private javax.swing.JLabel submitButtonLabel;
     // End of variables declaration//GEN-END:variables
 }
