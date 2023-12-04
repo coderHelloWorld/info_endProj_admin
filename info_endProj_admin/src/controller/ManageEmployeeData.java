@@ -45,4 +45,8 @@ public class ManageEmployeeData {
         // delete employee based on eid
         return true;
     }
+    public static void addUser(int EID, String Name, String CompanyName, String Role, String Password){
+     // add user to database .. add fields accordingly
+    }
+    
 }

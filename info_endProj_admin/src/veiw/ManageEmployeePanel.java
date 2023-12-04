@@ -48,11 +48,11 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         passwordLabel = new javax.swing.JLabel();
         employeeIDTextField = new javax.swing.JTextField();
         nameTextField = new javax.swing.JTextField();
-        companyNameTextField = new javax.swing.JTextField();
         passwordTextField = new javax.swing.JTextField();
         submitButton = new javax.swing.JPanel();
         submitButtonVariable = new javax.swing.JLabel();
         roleComboBox = new javax.swing.JComboBox<>();
+        companyNameComboBox = new javax.swing.JComboBox<>();
         deleteButton = new javax.swing.JPanel();
         deleteButtonLabel = new javax.swing.JLabel();
 
@@ -131,8 +131,6 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
         nameTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        companyNameTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
         passwordTextField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         submitButton.setBackground(new java.awt.Color(255, 255, 255));
@@ -162,6 +160,10 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Associate", "Manager" }));
         roleComboBox.setSelectedIndex(-1);
 
+        companyNameComboBox.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        companyNameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UPS", "Amazon" }));
+        companyNameComboBox.setSelectedIndex(-1);
+
         javax.swing.GroupLayout addEmployeeFormLayout = new javax.swing.GroupLayout(addEmployeeForm);
         addEmployeeForm.setLayout(addEmployeeFormLayout);
         addEmployeeFormLayout.setHorizontalGroup(
@@ -178,11 +180,11 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addGap(13, 21, Short.MAX_VALUE)
                 .addGroup(addEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(passwordTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(companyNameTextField)
                     .addComponent(employeeIDTextField, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(roleComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(roleComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(companyNameComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addEmployeeFormLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +204,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(addEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(companyNameLabel)
-                    .addComponent(companyNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(companyNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(addEmployeeFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(roleLabel)
@@ -297,25 +299,106 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
     private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
         // TODO add your handling code here:
-        boolean val = validate_data();
+        demo();
     }//GEN-LAST:event_submitButtonMouseClicked
 
-   private boolean validate_data(){
+//   private boolean validate_data(){
+//       int employeeID;
+//       try{employeeID = Integer.parseInt(employeeIDTextField.getText());
+//            System.out.println("Data is "+ employeeID);
+//            if(ManageEmployeeData.isEIDUnique(employeeID)){
+//                return false;
+//            }
+//       }catch(Exception e){
+//           System.out.println("Enter valid number");
+//           return false;
+//       }
+//       if(nameTextField.getText().length()<2){
+//           System.out.println("Enter valid name");           
+//           return false;
+//       }
+//       
+//    return true;
+//   }
+   
+   private void demo(){
+//        EmpTable et = new EmpTable();
+//        et.setLegalName(legalNameField.getText());
+//        et.setUserName(userNameField.getText());
+//        et.setPhoneNumber(phoneField.getText());
+//        et.setEmailId(emailField.getText());
+
        int employeeID;
        try{employeeID = Integer.parseInt(employeeIDTextField.getText());
             System.out.println("Data is "+ employeeID);
             if(ManageEmployeeData.isEIDUnique(employeeID)){
-                return false;
             }
        }catch(Exception e){
+           employeeID = 0;
            System.out.println("Enter valid number");
-           return false;
        }
-       if(nameTextField.getText().length()<2){
-           System.out.println("Enter valid name");           
-           return false;
-       }
-    return true;
+
+        String[] C= new String[5];
+        int[] i = {0,0,0,0,0};
+        if(employeeID == 0){
+            C[0]="Emplyee ID ";
+            i[0]=1;
+            JOptionPane.showMessageDialog(this, " Enter Unique EID", "Error!", HEIGHT);
+            employeeIDTextField.setText("");
+        }
+        if(nameTextField.getText().length()<2){
+            C[1]="Name of Employee ";
+            i[1]=1;
+            JOptionPane.showMessageDialog(this, " Enter Valid Name (atleast two alphabet!)", "Error!", HEIGHT);
+            nameTextField.setText("");
+        }
+        String Company = (String) companyNameComboBox.getSelectedItem();        
+        if(Company == null){
+            C[2]="Company Name ";
+            i[2]=1;
+        }
+        String Role = (String) roleComboBox.getSelectedItem();        
+        if(Role == null){
+            C[3]="Role ";
+            i[3]=1;
+        }
+        if(passwordTextField.getText().length()<5){
+            C[4]="Password ";
+            i[4]=1;
+            JOptionPane.showMessageDialog(this, " Enter Valid Password (min length 5)", "Error!", HEIGHT);
+            nameTextField.setText("");
+        }        
+        int z;
+        String st= "";
+        for(z=0; z<5; z++){
+            if(i[z]==1){
+                st += C[z];
+                if(z < C.length - 1) {
+                    st += ", ";
+                }
+            }
+        }
+        System.out.println(st);
+        if(st.length()==0){
+            JOptionPane.showMessageDialog(this, "Hurray, Employee Added! ", "Form Submitted", HEIGHT);
+            System.out.println("Data is "+employeeID+ " " + nameTextField.getText() + " "+ Company + " " + Role + " " + passwordTextField.getText());
+            ManageEmployeeData.addUser(employeeID, nameTextField.getText(), Company, Role, passwordTextField.getText());
+            populateTable();
+            //int selectedIndex = viewTable.getSelectedRow();
+            //if(selectedIndex == -1){
+            //    JOptionPane.showMessageDialog(this, "Please Select a user to update", "Cannot update user", HEIGHT);
+            //}
+//            try{
+//                User selectedUser = users.get(selectedIndex);
+//                DatabaseConnector.editUser(selectedUser, pat);
+//                populateFields();
+//            }catch(Exception e){
+//                JOptionPane.showMessageDialog(this, "Exception occoured!", "Cannot update user", HEIGHT);
+//            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Please Fill Out Remaning Values: "+st, "Enter All Values", HEIGHT);
+        }   
    }
    
     private void populateTable(){
@@ -344,8 +427,8 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
     private javax.swing.JPanel addEmployeeButton;
     private javax.swing.JPanel addEmployeeForm;
     private javax.swing.JLabel addEmployeeLabel;
+    private javax.swing.JComboBox<String> companyNameComboBox;
     private javax.swing.JLabel companyNameLabel;
-    private javax.swing.JTextField companyNameTextField;
     private javax.swing.JPanel deleteButton;
     private javax.swing.JLabel deleteButtonLabel;
     private javax.swing.JLabel employeeIDLable;
