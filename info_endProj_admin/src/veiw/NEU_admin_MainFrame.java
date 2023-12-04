@@ -86,7 +86,7 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
 
         orderCancellationLabel_SidePanel.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         orderCancellationLabel_SidePanel.setForeground(new java.awt.Color(255, 255, 255));
-        orderCancellationLabel_SidePanel.setText("Order Cancellation Requests - ");
+        orderCancellationLabel_SidePanel.setText("Order Cancellation Requests");
 
         javax.swing.GroupLayout orderCancellationButton_SidePanelLayout = new javax.swing.GroupLayout(orderCancellationButton_SidePanel);
         orderCancellationButton_SidePanel.setLayout(orderCancellationButton_SidePanelLayout);
@@ -142,7 +142,7 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
 
         OrderAssignmentLabel_SidePanel.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         OrderAssignmentLabel_SidePanel.setForeground(new java.awt.Color(255, 255, 255));
-        OrderAssignmentLabel_SidePanel.setText("Order Assignments - ");
+        OrderAssignmentLabel_SidePanel.setText("Order Assignments");
 
         javax.swing.GroupLayout OrderAssignmentButton_SidePanelLayout = new javax.swing.GroupLayout(OrderAssignmentButton_SidePanel);
         OrderAssignmentButton_SidePanel.setLayout(OrderAssignmentButton_SidePanelLayout);
