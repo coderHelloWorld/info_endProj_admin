@@ -4,6 +4,13 @@
  */
 package veiw;
 
+import controller.OrderCancellationRequestData;
+import static java.awt.image.ImageObserver.HEIGHT;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.CancelRequest;
+
 /**
  *
  * @author Purvam Sheth
@@ -13,8 +20,11 @@ public class OrderCancellationRequestPanel extends javax.swing.JPanel {
     /**
      * Creates new form OrderCancellationRequestPanel
      */
+    CancelRequest req;
+    ArrayList<CancelRequest> reqs;
     public OrderCancellationRequestPanel() {
         initComponents();
+        populateTable();
     }
 
     /**
@@ -26,13 +36,13 @@ public class OrderCancellationRequestPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tableScrollPane = new javax.swing.JScrollPane();
+        cancellationRequestsTableScrollPane = new javax.swing.JScrollPane();
         CancelRequest_Table = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        pendingRequestCount = new javax.swing.JLabel();
+        approveButton = new javax.swing.JPanel();
+        approveButtonLabel = new javax.swing.JLabel();
+        rejectButton = new javax.swing.JPanel();
+        rejectButtonLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(943, 600));
@@ -57,8 +67,7 @@ public class OrderCancellationRequestPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        CancelRequest_Table.setRowSelectionAllowed(true);
-        tableScrollPane.setViewportView(CancelRequest_Table);
+        cancellationRequestsTableScrollPane.setViewportView(CancelRequest_Table);
         if (CancelRequest_Table.getColumnModel().getColumnCount() > 0) {
             CancelRequest_Table.getColumnModel().getColumn(0).setResizable(false);
             CancelRequest_Table.getColumnModel().getColumn(1).setResizable(false);
@@ -66,43 +75,53 @@ public class OrderCancellationRequestPanel extends javax.swing.JPanel {
             CancelRequest_Table.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel1.setText("Total Pending Requests: ");
+        pendingRequestCount.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        pendingRequestCount.setText("Total Pending Requests: ");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        approveButton.setBackground(new java.awt.Color(255, 255, 255));
+        approveButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        approveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                approveButtonMouseClicked(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Approve Cancellation Request");
+        approveButtonLabel.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        approveButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        approveButtonLabel.setText("Approve Cancellation Request");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+        javax.swing.GroupLayout approveButtonLayout = new javax.swing.GroupLayout(approveButton);
+        approveButton.setLayout(approveButtonLayout);
+        approveButtonLayout.setHorizontalGroup(
+            approveButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(approveButtonLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        approveButtonLayout.setVerticalGroup(
+            approveButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(approveButtonLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        rejectButton.setBackground(new java.awt.Color(255, 255, 255));
+        rejectButton.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        rejectButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rejectButtonMouseClicked(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(" Reject Cancellation Request");
+        rejectButtonLabel.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        rejectButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rejectButtonLabel.setText(" Reject Cancellation Request");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout rejectButtonLayout = new javax.swing.GroupLayout(rejectButton);
+        rejectButton.setLayout(rejectButtonLayout);
+        rejectButtonLayout.setHorizontalGroup(
+            rejectButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(rejectButtonLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+        rejectButtonLayout.setVerticalGroup(
+            rejectButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(rejectButtonLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -114,38 +133,85 @@ public class OrderCancellationRequestPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cancellationRequestsTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pendingRequestCount, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(350, 350, 350)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(rejectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(approveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cancellationRequestsTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pendingRequestCount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(approveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(102, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void rejectButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rejectButtonMouseClicked
+        // TODO add your handling code here:
+        int selectedIndex = CancelRequest_Table.getSelectedRow();
+        if(selectedIndex == -1){
+            JOptionPane.showMessageDialog(this, "Please, first select an order", "Cannot perform action", HEIGHT);
+        }
+        CancelRequest selectedData = reqs.get(selectedIndex);
+        //System.out.println("Selected id is: "+ selectedData.getOID());
+        OrderCancellationRequestData.deleteRequest(selectedData.getOID());
+        populateTable(); 
+    }//GEN-LAST:event_rejectButtonMouseClicked
+
+    private void approveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approveButtonMouseClicked
+        // TODO add your handling code here:
+        int selectedIndex = CancelRequest_Table.getSelectedRow();
+        if(selectedIndex == -1){
+            JOptionPane.showMessageDialog(this, "Please, first select an order", "Cannot perform action", HEIGHT);
+        }
+        CancelRequest selectedData = reqs.get(selectedIndex);
+        // System.out.println("Selected id is: "+ selectedData.getOID());
+        OrderCancellationRequestData.updateOrderStatus(selectedData.getOID());
+        populateTable();
+    }//GEN-LAST:event_approveButtonMouseClicked
+
+    private void populateTable(){
+        // Here need to populate field. 
+        System.out.println("Hello world from View Panel! ");
+        try{
+            this.reqs = OrderCancellationRequestData.getAllUsers();
+            DefaultTableModel table = (DefaultTableModel) CancelRequest_Table.getModel();
+            table.setRowCount(0);
+            for(CancelRequest u: reqs){
+                Object[] row = new Object[5];
+                row[0] = u.getOID();
+                row[1] = u.getRequesterCompany();
+                row[2] = u.getOrderStatus();
+                row[3] = u.getDateOfRequest();
+                row[4] = u.getComment();
+                table.addRow(row);
+            }
+            pendingRequestCount.setText("Total Pending Requests : " +OrderCancellationRequestData.totalCancellationRequestTally()); 
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Exception occoured!", "Cannot update user", HEIGHT);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CancelRequest_Table;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane tableScrollPane;
+    private javax.swing.JPanel approveButton;
+    private javax.swing.JLabel approveButtonLabel;
+    private javax.swing.JScrollPane cancellationRequestsTableScrollPane;
+    private javax.swing.JLabel pendingRequestCount;
+    private javax.swing.JPanel rejectButton;
+    private javax.swing.JLabel rejectButtonLabel;
     // End of variables declaration//GEN-END:variables
 }
+
+
