@@ -46,6 +46,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         OrderAssignmentLabel_SidePanel = new javax.swing.JLabel();
         ExportButton_SidePanel1 = new javax.swing.JPanel();
         ExportLabel_SidePanel1 = new javax.swing.JLabel();
+        LogOutButton = new javax.swing.JPanel();
+        LogOutLabelSidePanel = new javax.swing.JLabel();
         viewPanel = new javax.swing.JPanel();
         viewSplitPane = new javax.swing.JSplitPane();
         topPanel = new javax.swing.JPanel();
@@ -186,11 +188,42 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        LogOutButton.setBackground(new java.awt.Color(52, 104, 136));
+        LogOutButton.setPreferredSize(new java.awt.Dimension(186, 56));
+        LogOutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogOutButtonMouseClicked(evt);
+            }
+        });
+
+        LogOutLabelSidePanel.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        LogOutLabelSidePanel.setForeground(new java.awt.Color(255, 255, 255));
+        LogOutLabelSidePanel.setText("Logout");
+
+        javax.swing.GroupLayout LogOutButtonLayout = new javax.swing.GroupLayout(LogOutButton);
+        LogOutButton.setLayout(LogOutButtonLayout);
+        LogOutButtonLayout.setHorizontalGroup(
+            LogOutButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogOutButtonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LogOutLabelSidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        LogOutButtonLayout.setVerticalGroup(
+            LogOutButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogOutButtonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LogOutLabelSidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(orderCancellationButton_SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ManageEmployeeButton_SidePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+            .addComponent(OrderAssignmentButton_SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
+            .addComponent(ExportButton_SidePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
             .addGroup(sidePanelLayout.createSequentialGroup()
                 .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(sidePanelLayout.createSequentialGroup()
@@ -199,10 +232,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
                     .addGroup(sidePanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(Seperator_1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addComponent(ManageEmployeeButton_SidePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-            .addComponent(OrderAssignmentButton_SidePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
-            .addComponent(ExportButton_SidePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addContainerGap(46, Short.MAX_VALUE))
+            .addComponent(LogOutButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,6 +250,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
                 .addComponent(OrderAssignmentButton_SidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(ExportButton_SidePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LogOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -336,6 +369,7 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
         OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
         ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
+        LogOutButton.setBackground(new Color(52, 104, 136)); 
     }//GEN-LAST:event_ManageEmployeeButton_SidePanelMouseClicked
 
     private void orderCancellationButton_SidePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderCancellationButton_SidePanelMouseClicked
@@ -349,6 +383,7 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136)); 
         OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
         ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
+        LogOutButton.setBackground(new Color(52, 104, 136)); 
     }//GEN-LAST:event_orderCancellationButton_SidePanelMouseClicked
 
     private void OrderAssignmentButton_SidePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderAssignmentButton_SidePanelMouseClicked
@@ -362,6 +397,7 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
         ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136));  
         ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
+        LogOutButton.setBackground(new Color(52, 104, 136)); 
     }//GEN-LAST:event_OrderAssignmentButton_SidePanelMouseClicked
 
     private void ExportButton_SidePanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExportButton_SidePanel1MouseClicked
@@ -375,7 +411,23 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
         OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
         orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
         ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136)); 
+        LogOutButton.setBackground(new Color(52, 104, 136)); 
     }//GEN-LAST:event_ExportButton_SidePanel1MouseClicked
+
+    private void LogOutButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutButtonMouseClicked
+        // TODO add your handling code here:
+        jLabel3.setText("Logout /");
+        LogoutPanel ed = new LogoutPanel(this);
+        bottomPanel.add(ed);
+        CardLayout lay = (CardLayout)bottomPanel.getLayout();
+        lay.next(bottomPanel);
+        
+        ExportButton_SidePanel1.setBackground(new Color(52, 104, 136));
+        OrderAssignmentButton_SidePanel.setBackground(new Color(52, 104, 136));
+        orderCancellationButton_SidePanel.setBackground(new Color(52, 104, 136));
+        ManageEmployeeButton_SidePanel.setBackground(new Color(52, 104, 136)); 
+        LogOutButton.setBackground(new Color(122,166,194)); 
+    }//GEN-LAST:event_LogOutButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -415,6 +467,8 @@ public class NEU_admin_MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ExportButton_SidePanel1;
     private javax.swing.JLabel ExportLabel_SidePanel1;
+    private javax.swing.JPanel LogOutButton;
+    private javax.swing.JLabel LogOutLabelSidePanel;
     private javax.swing.JPanel ManageEmployeeButton_SidePanel;
     private javax.swing.JPanel OrderAssignmentButton_SidePanel;
     private javax.swing.JLabel OrderAssignmentLabel_SidePanel;
