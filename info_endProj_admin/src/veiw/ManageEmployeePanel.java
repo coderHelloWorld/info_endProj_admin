@@ -4,7 +4,10 @@
  */
 package veiw;
 
+import controller.ManageEmployeeData;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.EmpTable;
 
 /**
@@ -20,7 +23,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
     ArrayList<EmpTable> ets;
     public ManageEmployeePanel() {
         initComponents();
-        // populateTable();
+        populateTable();
     }
 
     /**
@@ -68,11 +71,25 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
             new String [] {
                 "EID", "Employee Name", "Date Joined"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tableScrollPane.setViewportView(EmpData_Table);
 
         TotalEmployeeCountLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         TotalEmployeeCountLabel.setText("Total Employee: ");
+
+        addEmployeeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addEmployeeButtonMouseClicked(evt);
+            }
+        });
 
         addEmployeeLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         addEmployeeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -120,6 +137,11 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
 
         submitButton.setBackground(new java.awt.Color(255, 255, 255));
         submitButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                submitButtonMouseClicked(evt);
+            }
+        });
 
         submitButtonVariable.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         submitButtonVariable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -194,6 +216,12 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseClicked(evt);
+            }
+        });
+
         deleteButtonLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         deleteButtonLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         deleteButtonLabel.setText("Delete Employee");
@@ -227,7 +255,7 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
                             .addComponent(addEmployeeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(154, 154, 154)
                         .addComponent(addEmployeeForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(184, 184, 184)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -250,6 +278,65 @@ public class ManageEmployeePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
+        // TODO add your handling code here:
+        int selectedIndex = EmpData_Table.getSelectedRow();
+        if(selectedIndex == -1){
+            JOptionPane.showMessageDialog(this, "Please, first select an employee", "Cannot perform action", HEIGHT);
+        }
+        EmpTable selectedData = ets.get(selectedIndex);
+        // System.out.println("Selected id is: "+ selectedData.getOID());
+        ManageEmployeeData.deleteEmployeeStatus(selectedData.getEID());
+        populateTable();
+    }//GEN-LAST:event_deleteButtonMouseClicked
+
+    private void addEmployeeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addEmployeeButtonMouseClicked
+        // TODO add your handling code here:
+        addEmployeeForm.setVisible(true);
+    }//GEN-LAST:event_addEmployeeButtonMouseClicked
+
+    private void submitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitButtonMouseClicked
+        // TODO add your handling code here:
+        boolean val = validate_data();
+    }//GEN-LAST:event_submitButtonMouseClicked
+
+   private boolean validate_data(){
+       int employeeID;
+       try{employeeID = Integer.parseInt(employeeIDTextField.getText());
+            System.out.println("Data is "+ employeeID);
+            if(ManageEmployeeData.isEIDUnique(employeeID)){
+                return false;
+            }
+       }catch(Exception e){
+           System.out.println("Enter valid number");
+           return false;
+       }
+       if(nameTextField.getText().length()<2){
+           System.out.println("Enter valid name");           
+           return false;
+       }
+    return true;
+   }
+   
+    private void populateTable(){
+        System.out.println("Hello world from View Panel - manageEmployee! ");
+        try{
+            this.ets = ManageEmployeeData.getAllUsers();
+            DefaultTableModel table = (DefaultTableModel) EmpData_Table.getModel();
+            table.setRowCount(0);
+            for(EmpTable u: ets){
+                Object[] row = new Object[5];
+                row[0] = u.getEID();
+                row[1] = u.getEmployeeName();
+                row[2] = u.getDataJoined();
+                table.addRow(row);
+            }
+            addEmployeeForm.setVisible(false);
+            // TotalEmployeeCountLabel.setText("Total Pending Requests : " +OrderCancellationRequestData.totalCancellationRequestTally()); 
+        }catch(Exception e){
+                JOptionPane.showMessageDialog(this, "Exception occoured!", "Cannot update user", HEIGHT);
+        }        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable EmpData_Table;
